@@ -1,6 +1,26 @@
 import logo from './logo.svg';
-import React from 'react'
+import React from 'react';
+import  ApolloClient from 'apollo-boost';
+import {gql} from  'graphql-tag'
+
+
 import './App.css';
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000'
+})
+
+client
+  .query({
+    query: gql`
+        {
+            breachedAccountByEmailAddress( emailAddress: "bsass1%40pacbell.net") {
+                Name
+            }
+        }
+    `
+  }).then ( data => console.log( data))
+
 
 function App() {
   return (
